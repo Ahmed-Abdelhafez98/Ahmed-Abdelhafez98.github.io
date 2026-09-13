@@ -98,17 +98,18 @@ main { padding-block: clamp(2rem, 5vw, 3.5rem); }
 .tag { font-size: 0.78rem; padding: 0.15rem 0.55rem; border-radius: 999px; background: var(--accent-dim); color: var(--accent); white-space: nowrap; }
 
 .post-list { list-style: none; margin: 0; padding: 0; }
-.post-list li { display: grid; grid-template-columns: 7.5rem 10rem 1fr; gap: 0.5rem 1.25rem; align-items: start; padding: 1rem 0; border-bottom: 1px solid var(--border); }
-.post-list time { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 0.15rem; }
-.post-list .post-thumb { display: block; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--bg); }
-.post-list .post-thumb img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; }
+.post-list li { display: grid; grid-template-columns: 14rem 1fr; gap: 0.5rem 1.5rem; align-items: stretch; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.post-list .side { display: flex; flex-direction: column; gap: 0.45rem; min-width: 0; }
+.post-list time { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+.post-list .post-thumb { position: relative; flex: 1; min-height: 5rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--bg); }
+.post-list .post-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .post-list .t { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
 .post-list .t a { color: var(--text); font-weight: 600; }
 .post-list .t .kind { font-size: 0.78rem; color: var(--muted); }
 .post-list .t p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 @media (max-width: 720px) {
-  .post-list li { grid-template-columns: 1fr; gap: 0.35rem; }
-  .post-list .post-thumb { max-width: 22rem; }
+  .post-list li { grid-template-columns: 1fr; gap: 0.5rem; }
+  .post-list .post-thumb { flex: none; aspect-ratio: 1200 / 630; min-height: 0; }
 }
 
 .timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--border); }
