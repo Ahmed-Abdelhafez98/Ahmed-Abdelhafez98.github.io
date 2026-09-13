@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, skills, education, awards } from '../data/site';
+---
+
+<Base title="About" description={site.summary}>
+  <div class="prose">
+    <h1>About</h1>
+    <p class="lead">{site.summary}</p>
+    <p>
+      I started with PHP and Laravel at ITI in 2020, moved through a large job platform at Bayt.com, spent four
+      years rebuilding an insurance SaaS backend in NestJS at Trufla, and now lead backend and infrastructure work
+      at Uptal. Along the way I kept building side projects to learn stacks I was not using at work: Ruby on Rails,
+      Angular, LangChain agents, and lately Laravel again.
+    </p>
+    <div class="links-row">
+      <a class="btn primary" href="/resume.pdf">Download résumé (PDF)</a>
+      <a class="btn" href={site.linkedin} rel="noopener">LinkedIn</a>
+      <a class="btn" href={site.github} rel="noopener">GitHub</a>
+      <a class="btn" href={`mailto:${site.email}`}>Email</a>
+    </div>
+
+    <h2>Skills</h2>
+    <dl class="def">
+      {skills.map((s) => (
+        <>
+          <dt>{s.group}</dt>
+          <dd>
+            {s.items.join(', ')}
+            {s.also && <span class="muted"> · familiar with {s.also}</span>}
+          </dd>
+        </>
+      ))}
+    </dl>
+
+    <h2>Education</h2>
+    <p>
+      <strong>{education.degree}</strong>, {education.school} <span class="muted">({education.period})</span><br />
+      <span class="muted">Relevant coursework: {education.coursework}.</span>
+    </p>
+
+    <h2>Awards and competitions</h2>
+    <ul>{awards.map((a) => <li>{a}</li>)}</ul>
+
+    <h2>Contact</h2>
+    <p>
+      The fastest way to reach me is email: <a href={`mailto:${site.email}`}>{site.email}</a>. I am also on
+      <a href={site.linkedin} rel="noopener">LinkedIn</a>.
+    </p>
+  </div>
+</Base>

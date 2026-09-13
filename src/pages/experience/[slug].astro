@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { formatDate, isoDate } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('experience');
+  return entries.map((e) => ({ params: { slug: e.id }, props: { entry: e } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+
+<Base title={d.title} description={d.summary} type="article" pubDate={d.pubDate}>
+  <article class="prose">
+    <header class="article-head">
+      <p class="eyebrow">Experience</p>
+      <h1>{d.title}</h1>
+      <div class="meta">
+        <span>{d.role}, {d.company}</span>
+        <span>·</span>
+        <span>{d.location}</span>
+      </div>
+      <div class="meta" style="margin-top: 0.35rem">
+        <span>{d.period}</span>
+        <span>·</span>
+        <time datetime={isoDate(d.pubDate)}>Written {formatDate(d.pubDate)}</time>
+      </div>
+    </header>
+    <div class="article-body">
+      <Content />
+    </div>
+    <a class="back" href="/experience/">← All experience</a>
+  </article>
+</Base>

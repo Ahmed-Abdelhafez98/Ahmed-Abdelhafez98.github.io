@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { allPosts } from '../../lib/posts';
+
+const posts = await allPosts();
+const years = [...new Set(posts.map((p) => p.pubDate.getFullYear()))];
+---
+
+<Base title="Writing" description="Write-ups on Ahmed Emad's projects and past roles, dated when the work ended.">
+  <div class="prose">
+    <h1>Writing</h1>
+    <p class="lead">
+      One write-up per project and per role. Each is dated when the work ended, so this doubles as a timeline.
+      <a href="/rss.xml">RSS feed</a>.
+    </p>
+    {years.map((y) => (
+      <>
+        <p class="year">{y}</p>
+        <PostList posts={posts.filter((p) => p.pubDate.getFullYear() === y)} />
+      </>
+    ))}
+  </div>
+</Base>

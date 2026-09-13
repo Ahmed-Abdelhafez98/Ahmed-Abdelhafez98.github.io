@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+  period: string;
+  stack: string[];
+  repo: string;
+  href: string;
+}
+const { title, summary, period, stack, repo, href } = Astro.props;
+---
+
+<article class="card">
+  <h3><a href={href}>{title}</a></h3>
+  <p>{summary}</p>
+  <div class="tags">{stack.slice(0, 4).map((s) => <span class="tag">{s}</span>)}</div>
+  <div class="foot">
+    <span>{period}</span>
+    <a href={repo} rel="noopener">Source ↗</a>
+  </div>
+</article>

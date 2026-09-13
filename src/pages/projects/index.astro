@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+---
+
+<Base title="Projects" description="Backend, API and full-stack projects by Ahmed Emad, newest first, each with a write-up and source code.">
+  <div class="prose">
+    <h1>Projects</h1>
+    <p class="lead">Newest first. Each one links to a write-up and to the source on GitHub.</p>
+  </div>
+  <div class="grid" style="margin-top: 2rem">
+    {projects.map((p) => (
+      <ProjectCard
+        title={p.data.title}
+        summary={p.data.summary}
+        period={p.data.period}
+        stack={p.data.stack}
+        repo={p.data.repo}
+        href={`/projects/${p.id}/`}
+      />
+    ))}
+  </div>
+</Base>

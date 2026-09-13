@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { formatDate, isoDate } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p) => ({ params: { slug: p.id }, props: { entry: p } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+
+<Base title={d.title} description={d.summary} type="article" pubDate={d.pubDate}>
+  <article class="prose">
+    <header class="article-head">
+      <p class="eyebrow">Project</p>
+      <h1>{d.title}</h1>
+      <div class="meta">
+        <span>{d.period}</span>
+        <span>·</span>
+        <time datetime={isoDate(d.pubDate)}>Written {formatDate(d.pubDate)}</time>
+        <span>·</span>
+        <a href={d.repo} rel="noopener">Source on GitHub ↗</a>
+      </div>
+      <div class="tags">{d.stack.map((s) => <span class="tag">{s}</span>)}</div>
+    </header>
+    <div class="article-body">
+      <Content />
+    </div>
+    <a class="back" href="/projects/">← All projects</a>
+  </article>
+</Base>

@@ -1,0 +1,23 @@
+---
+import type { Post } from '../lib/posts';
+import { formatDate, isoDate } from '../lib/format';
+
+interface Props {
+  posts: Post[];
+  showKind?: boolean;
+}
+const { posts, showKind = true } = Astro.props;
+---
+
+<ul class="post-list">
+  {posts.map((p) => (
+    <li>
+      <time datetime={isoDate(p.pubDate)}>{formatDate(p.pubDate)}</time>
+      <div class="t">
+        <a href={p.href}>{p.title}</a>
+        {showKind && <span class="kind">{p.kind} · {p.meta}</span>}
+        <p>{p.summary}</p>
+      </div>
+    </li>
+  ))}
+</ul>

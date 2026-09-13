@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import { jobs, education, awards } from '../../data/site';
+---
+
+<Base title="Experience" description="Ahmed Emad's work history: Uptal, Trufla, Bayt.com and ITI, with a write-up for each role.">
+  <div class="prose">
+    <h1>Experience</h1>
+    <p class="lead">Six years of backend work across SaaS, marketplaces and a social platform. Each role has its own write-up.</p>
+
+    <h2>Roles</h2>
+    <ol class="timeline">
+      {jobs.map((j) => (
+        <li class:list={{ current: j.current }}>
+          <div class="when">{j.period}</div>
+          <h3><a href={`/experience/${j.slug}/`}>{j.role}, {j.company}</a></h3>
+          <div class="where">{j.location}</div>
+          <p>{j.summary}</p>
+          <a class="small" href={`/experience/${j.slug}/`}>Read the write-up →</a>
+        </li>
+      ))}
+    </ol>
+
+    <h2>Education</h2>
+    <p>
+      <strong>{education.degree}</strong>, {education.school} <span class="muted">({education.period})</span><br />
+      <span class="muted">Relevant coursework: {education.coursework}.</span>
+    </p>
+
+    <h2>Awards and competitions</h2>
+    <ul>{awards.map((a) => <li>{a}</li>)}</ul>
+  </div>
+</Base>

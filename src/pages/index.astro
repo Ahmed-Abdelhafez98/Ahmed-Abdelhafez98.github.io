@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PostList from '../components/PostList.astro';
+import { site, jobs } from '../data/site';
+import { allPosts } from '../lib/posts';
+
+const featured = (await getCollection('projects', (p) => p.data.featured))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+const latest = (await allPosts()).slice(0, 4);
+const now = jobs[0];
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.role,
+  worksFor: { '@type': 'Organization', name: now.company },
+  email: `mailto:${site.email}`,
+  url: site.url,
+  sameAs: [site.github, site.linkedin],
+  address: { '@type': 'PostalAddress', addressCountry: 'EG' },
+};
+---
+
+<Base title={site.name} description={site.summary}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(person)} />
+
+  <section class="prose">
+    <p class="eyebrow">{site.role} · {site.location}</p>
+    <h1>Hi, I'm {site.name}.</h1>
+    <p class="lead">{site.tagline}</p>
+    <p class="muted">
+      Currently {now.role} at <a href={`/experience/${now.slug}/`}>{now.company}</a>, where I own the
+      backend architecture and cloud infrastructure for a location-based social platform.
+    </p>
+    <div class="links-row">
+      <a class="btn primary" href="/projects/">See my work</a>
+      <a class="btn" href="/resume.pdf">Résumé (PDF)</a>
+      <a class="btn" href={site.github} rel="noopener">GitHub</a>
+      <a class="btn" href={site.linkedin} rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Featured projects</h2>
+      <a href="/projects/">All projects →</a>
+    </div>
+    <div class="grid">
+      {featured.map((p) => (
+        <ProjectCard
+          title={p.data.title}
+          summary={p.data.summary}
+          period={p.data.period}
+          stack={p.data.stack}
+          repo={p.data.repo}
+          href={`/projects/${p.id}/`}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Latest writing</h2>
+      <a href="/writing/">All writing →</a>
+    </div>
+    <PostList posts={latest} />
+  </section>
+</Base>
