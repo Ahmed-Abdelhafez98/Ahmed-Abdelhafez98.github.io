@@ -9,7 +9,7 @@ export const site = {
   email: 'ahmed.emad.abdelhafez@gmail.com',
   github: 'https://github.com/Ahmed-Abdelhafez98',
   linkedin: 'https://www.linkedin.com/in/ahmed-abdelhafez/',
-  url: 'https://ahmed-abdelhafez98.github.io',
+  url: 'https://ahmedemad.is-a.dev',
 };
 
 export const jobs = [
