@@ -121,7 +121,7 @@ function collect(dir, kind) {
     });
 }
 
-mkdirSync(OUT, { recursive: true });
+mkdirSync(join(OUT, 'thumb'), { recursive: true });
 const items = [
   ...collect('src/content/projects', 'Project'),
   ...collect('src/content/experience', 'Experience'),
@@ -136,5 +136,9 @@ items.push({
 for (const it of items) {
   const s = svg(it);
   await sharp(Buffer.from(s)).png({ compressionLevel: 9 }).toFile(join(OUT, `${it.slug}.png`));
+  await sharp(Buffer.from(s), { density: 144 })
+    .resize(600, 315, { kernel: 'lanczos3' })
+    .png({ compressionLevel: 9 })
+    .toFile(join(OUT, 'thumb', `${it.slug}.png`));
   console.log(`${it.slug}.png  icons=${it.icons.map((i) => i.slug).join(',') || '-'}`);
 }

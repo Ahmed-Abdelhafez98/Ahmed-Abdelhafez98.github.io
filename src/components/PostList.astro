@@ -13,7 +13,7 @@ const { posts, showKind = true } = Astro.props;
   {posts.map((p) => (
     <li>
       <a class="post-thumb" href={p.href} tabindex="-1" aria-hidden="true">
-        <img src={p.cover} width="1200" height="630" alt="" loading="lazy" decoding="async" />
+        <img src={p.cover.replace('/covers/', '/covers/thumb/')} width="600" height="315" alt="" loading="lazy" decoding="async" />
         <time datetime={isoDate(p.pubDate)}>{formatDate(p.pubDate)}</time>
       </a>
       <div class="t">
