@@ -7,6 +7,7 @@ export type Post = {
   pubDate: Date;
   kind: 'Project' | 'Experience';
   meta: string;
+  cover: string;
 };
 
 export async function allPosts(): Promise<Post[]> {
@@ -22,6 +23,7 @@ export async function allPosts(): Promise<Post[]> {
       pubDate: p.data.pubDate,
       kind: 'Project' as const,
       meta: p.data.period,
+      cover: `/covers/${p.id}.png`,
     })),
     ...experience.map((e) => ({
       title: e.data.title,
@@ -30,6 +32,7 @@ export async function allPosts(): Promise<Post[]> {
       pubDate: e.data.pubDate,
       kind: 'Experience' as const,
       meta: `${e.data.company} · ${e.data.period}`,
+      cover: `/covers/${e.id}.png`,
     })),
   ];
   return posts.sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
