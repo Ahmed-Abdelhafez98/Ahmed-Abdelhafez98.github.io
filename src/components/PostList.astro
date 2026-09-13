@@ -12,12 +12,10 @@ const { posts, showKind = true } = Astro.props;
 <ul class="post-list">
   {posts.map((p) => (
     <li>
-      <div class="side">
+      <a class="post-thumb" href={p.href} tabindex="-1" aria-hidden="true">
+        <img src={p.cover} width="1200" height="630" alt="" loading="lazy" decoding="async" />
         <time datetime={isoDate(p.pubDate)}>{formatDate(p.pubDate)}</time>
-        <a class="post-thumb" href={p.href} tabindex="-1" aria-hidden="true">
-          <img src={p.cover} width="1200" height="630" alt="" loading="lazy" decoding="async" />
-        </a>
-      </div>
+      </a>
       <div class="t">
         <a href={p.href}>{p.title}</a>
         {showKind && <span class="kind">{p.kind} · {p.meta}</span>}
