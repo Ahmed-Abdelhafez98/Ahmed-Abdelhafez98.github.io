@@ -135,6 +135,6 @@ items.push({
 });
 for (const it of items) {
   const s = svg(it);
-  await sharp(Buffer.from(s)).png({ compressionLevel: 9, palette: true }).toFile(join(OUT, `${it.slug}.png`));
+  await sharp(Buffer.from(s)).png({ compressionLevel: 9 }).toFile(join(OUT, `${it.slug}.png`));
   console.log(`${it.slug}.png  icons=${it.icons.map((i) => i.slug).join(',') || '-'}`);
 }
