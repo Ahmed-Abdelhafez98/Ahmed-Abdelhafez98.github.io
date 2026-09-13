@@ -85,7 +85,10 @@ main { padding-block: clamp(2rem, 5vw, 3.5rem); }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 1rem; }
 
-.card { display: flex; flex-direction: column; gap: 0.6rem; padding: 1.15rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; min-width: 0; }
+.card { display: flex; flex-direction: column; gap: 0.6rem; padding: 1.15rem 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; min-width: 0; overflow: hidden; }
+.card .thumb { display: block; margin: -1.15rem -1.25rem 0.4rem; border-bottom: 1px solid var(--border); background: var(--bg); }
+.card .thumb img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; }
+.cover { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; border: 1px solid var(--border); border-radius: 10px; margin: 1.25rem 0 0; }
 .card h3 { margin: 0; font-size: 1.1rem; }
 .card h3 a { color: var(--text); }
 .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }

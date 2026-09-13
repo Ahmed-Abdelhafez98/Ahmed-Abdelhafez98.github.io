@@ -11,13 +11,15 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
+const cover = `/covers/${entry.id}.png`;
 ---
 
-<Base title={d.title} description={d.summary} type="article" pubDate={d.pubDate}>
+<Base title={d.title} description={d.summary} type="article" pubDate={d.pubDate} image={cover}>
   <article class="prose">
     <header class="article-head">
       <p class="eyebrow">Project</p>
       <h1>{d.title}</h1>
+      <img class="cover" src={cover} width="1200" height="630" alt="" />
       <div class="meta">
         <span>{d.period}</span>
         <span>·</span>

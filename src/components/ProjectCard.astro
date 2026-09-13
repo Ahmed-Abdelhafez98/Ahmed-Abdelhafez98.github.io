@@ -6,11 +6,15 @@ interface Props {
   stack: string[];
   repo: string;
   href: string;
+  cover: string;
 }
-const { title, summary, period, stack, repo, href } = Astro.props;
+const { title, summary, period, stack, repo, href, cover } = Astro.props;
 ---
 
 <article class="card">
+  <a class="thumb" href={href} tabindex="-1" aria-hidden="true">
+    <img src={cover} width="1200" height="630" alt="" loading="lazy" decoding="async" />
+  </a>
   <h3><a href={href}>{title}</a></h3>
   <p>{summary}</p>
   <div class="tags">{stack.slice(0, 4).map((s) => <span class="tag">{s}</span>)}</div>
