@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ahmedemad.is-a.dev/sitemap-index.xml
+Sitemap: https://ahmed-abdelhafez98.github.io/sitemap-index.xml

@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://ahmedemad.is-a.dev',
+  site: 'https://ahmed-abdelhafez98.github.io',
   integrations: [sitemap()],
   markdown: {
     shikiConfig: { theme: 'github-dark-default' },
