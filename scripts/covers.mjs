@@ -130,7 +130,7 @@ items.push({
   slug: 'default',
   title: 'Ahmed Emad: Senior Backend Engineer. Laravel, NestJS, Python and the infrastructure they run on',
   kind: 'Portfolio',
-  period: 'ahmed-abdelhafez98.github.io',
+  period: 'ahmedemad.is-a.dev',
   icons: ['laravel', 'nestjs', 'python', 'postgresql'].map((s) => iconBySlug[s]),
 });
 for (const it of items) {
